@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="../dist/hx-utils.js"></script>
+    <script>
+        console.log(hxUtils, hxUtils.generateId(10))
+        console.log(hxUtils.moment.format(new Date(), "yyyy年MM月dd日 HH时mm分ss秒 星期W"))
+
+        console.log(hxUtils.regUrl("http://192.168.110.222:9999/finance/usercash?status=2"))
+    </script>
+</body>
+</html>
