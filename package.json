@@ -1,6 +1,6 @@
 {
   "name": "hx-utils-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "JavaScript tools",
   "main": "dist/hx-utils.cjs.js",
   "module": "dist/hx-utils.esm.js",
