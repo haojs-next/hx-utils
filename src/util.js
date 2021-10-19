@@ -1,10 +1,19 @@
+const toStr = Object.prototype.toString;
+/**
+ * 
+ * @param {*} data 
+ */
+export function isType(data) {
+    return toStr.call(data);
+}
+
 /**
  * 判断数据类型
  * @param {*} data 数据
  * @param {*} type 是否指定类型
  */
-export function isType(data, type) {
-    return Object.prototype.toString.call(data).slice(8, -1) === type;
+export function verifyType(data, type) {
+    return isType(data).slice(8, -1) === type;
 }
 
 
@@ -45,20 +54,21 @@ export function regPhone(phone) {
  * 身份证号加密
  * @param {*} card 
  */
-export const encryptIdCard = (card) => {
+export const encryptIdCard = (card, start = 6, end = 4) => {
     if (!card) return;
-    let reg = /^(.{6})(?:\d+)(.{4})$/
-    return card.replace(reg, "$1********$2");
+    let reg = new RegExp(`^(.{${start}})(?:\\d+)(.{${end}})$`);
+    return String(card).replace(reg, "$1********$2");
 };
 
 /**
  * 手机号加密
  * @param {*} phone 
  */
-export const encryptPhone = (phone) => {
+export const encryptPhone = (phone, start = 3, end = 4) => {
     if (!phone) return;
-    let reg = /^(.{3})(?:\d+)(.{4})$/
-    return phone.toString().replace(reg, "$1****$2");
+    // let reg = /^(.{3})(?:\d+)(.{4})$/;
+    let reg = new RegExp(`^(.{${start}})(?:\\d+)(.{${end}})$`);
+    return String(phone).replace(reg, "$1****$2");
 };
 
 /**
@@ -66,6 +76,7 @@ export const encryptPhone = (phone) => {
  * @param {*} input 
  */
 export const regFixedPhone = function(input) {
+    if (!input) return false;
     return /^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/.test(input)
 }
 

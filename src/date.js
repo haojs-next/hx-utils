@@ -55,8 +55,13 @@ class Fecha {
                 },
                 W: function (dateObj) {
                     return ['日', '一', '二', '三', '四', '五', '六'][dateObj.getDay()];
+                },
+                WW: function (dateObj) {
+                    return ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][dateObj.getDay()];
+                },
+                WWW: function (dateObj) {
+                    return ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][dateObj.getDay()];
                 }
-                
             }
         };
     };

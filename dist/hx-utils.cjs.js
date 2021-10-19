@@ -117,6 +117,12 @@ var Fecha = /*#__PURE__*/function () {
           },
           W: function W(dateObj) {
             return ['日', '一', '二', '三', '四', '五', '六'][dateObj.getDay()];
+          },
+          WW: function WW(dateObj) {
+            return ['周日', '周一', '周二', '周三', '周四', '周五', '周六'][dateObj.getDay()];
+          },
+          WWW: function WWW(dateObj) {
+            return ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'][dateObj.getDay()];
           }
         }
       };
@@ -161,13 +167,23 @@ var Fecha = /*#__PURE__*/function () {
 
 var h = new Fecha();
 
+var toStr = Object.prototype.toString;
+/**
+ * 
+ * @param {*} data 
+ */
+
+function isType(data) {
+  return toStr.call(data);
+}
 /**
  * 判断数据类型
  * @param {*} data 数据
  * @param {*} type 是否指定类型
  */
-function isType(data, type) {
-  return Object.prototype.toString.call(data).slice(8, -1) === type;
+
+function verifyType(data, type) {
+  return isType(data).slice(8, -1) === type;
 }
 /**
  * 生成随机 id
@@ -208,9 +224,11 @@ function regPhone(phone) {
  */
 
 var encryptIdCard = function encryptIdCard(card) {
+  var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+  var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 4;
   if (!card) return;
-  var reg = /^(.{6})(?:\d+)(.{4})$/;
-  return card.replace(reg, "$1********$2");
+  var reg = new RegExp("^(.{".concat(start, "})(?:\\d+)(.{").concat(end, "})$"));
+  return String(card).replace(reg, "$1********$2");
 };
 /**
  * 手机号加密
@@ -218,9 +236,12 @@ var encryptIdCard = function encryptIdCard(card) {
  */
 
 var encryptPhone = function encryptPhone(phone) {
-  if (!phone) return;
-  var reg = /^(.{3})(?:\d+)(.{4})$/;
-  return phone.toString().replace(reg, "$1****$2");
+  var start = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 3;
+  var end = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 4;
+  if (!phone) return; // let reg = /^(.{3})(?:\d+)(.{4})$/;
+
+  var reg = new RegExp("^(.{".concat(start, "})(?:\\d+)(.{").concat(end, "})$"));
+  return String(phone).replace(reg, "$1****$2");
 };
 /**
  * 座机电话号
@@ -228,6 +249,7 @@ var encryptPhone = function encryptPhone(phone) {
  */
 
 var regFixedPhone = function regFixedPhone(input) {
+  if (!input) return false;
   return /^((0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/.test(input);
 };
 /**
@@ -278,7 +300,7 @@ function find(list, f) {
 
 function deepCopy(obj) {
   var cache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-  if (obj && isType(obj, "File")) return obj;
+  if (obj && isType(obj)) return obj;
   if (obj === null || _typeof(obj) !== "object") return obj;
   var hit = find(cache, function (f) {
     return f.original === obj;
@@ -464,6 +486,7 @@ var utils = {
   regIdCard: regIdCard,
   regPhone: regPhone,
   isType: isType,
+  verifyType: verifyType,
   deepCopy: deepCopy,
   encryptIdCard: encryptIdCard,
   encryptPhone: encryptPhone,
