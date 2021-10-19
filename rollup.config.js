@@ -10,12 +10,13 @@ export default [
     input: 'src/index.js',
     output: [
         { file: pkg.main, format: 'cjs', name: 'hxUtils' },
+        { file: pkg.module, format: 'es', name: 'hxUtils' },
 		{ file: pkg.unpkg, format: 'umd', name: 'hxUtils' }
     ],
     plugins: [
 		commonjs(),
 		babel(),
-		// terser(),
+		terser(),
 		filesize()
     ]
   }

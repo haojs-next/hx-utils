@@ -1,16 +1,17 @@
 {
-  "name": "hx-storage",
+  "name": "hx-utils-js",
   "version": "0.1.0",
   "description": "JavaScript tools",
   "main": "dist/hx-utils.cjs.js",
-  "module": "src/index.js",
+  "module": "dist/hx-utils.esm.js",
   "unpkg": "dist/hx-utils.js",
   "repository": "https://github.com/haojs-next/hx-utils.git",
   "author": "hao",
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w"
+    "dev": "rollup -c -w",
+    "pub": "npm publish"
   },
   "devDependencies": {
     "core-js": "^3.18.0",

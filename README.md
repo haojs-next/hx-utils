@@ -1,10 +1,14 @@
-# hx-utils (javascript tools)
+# hx-utils-js (javascript tools)
 
 
 ## 安装
 
-```
-yarn add hx-utils || npm i hx-utils -S
+```base
+npm i hx-utils-js --save
+
+or
+
+yarn add hx-utils-js
 
 ```
 ## 使用
@@ -12,7 +16,7 @@ yarn add hx-utils || npm i hx-utils -S
 ## 正则验证
 
 ```javascript
-import hxUtils from 'hx-utils';
+import hxUtils from 'hx-utils-js';
 
 // 验证身份证号
 let card = "110101*******";
@@ -49,7 +53,7 @@ hxUtils.regUrl("https://www.baidu.com") // result: true
 ## 类型
 
 ```javascript
-import hxUtils from 'hx-utils';
+import hxUtils from 'hx-utils-js';
 
 // 查询数据类型
 hxUtils.isType("测试字符串")  // result: [object String]
@@ -76,7 +80,7 @@ hxUtils.uuid()  // "244023b7-abfa-4208-e5f8-96ec49671fa9"
 ## 时间
 
 ```javascript
-import hxUtils from 'hx-utils';
+import hxUtils from 'hx-utils-js';
 
 // 注意：不支持 国际化配置，如需要请下载 dayjs、moment 等第三方工具
 // 格式： yyyy-MM-dd HH:mm:ss （YYYY 为错误，必须小写）
@@ -98,7 +102,7 @@ hxUtils.moment.format("时间", "今天WW HH:mm:ss ") // 今天周五 18:00:00
 ## 拷贝
 
 ```javascript
-import hxUtils from 'hx-utils';
+import hxUtils from 'hx-utils-js';
 
 hxUtils.deepCopy({});
 
@@ -107,7 +111,7 @@ hxUtils.deepCopy({});
 ## 识别浏览器
 
 ```javascript
-import hxUtils from 'hx-utils';
+import { browser } from 'hx-utils-js';
 
 let {
     isIE,       // ie
@@ -123,7 +127,7 @@ let {
     callCamera, // 看下面示例
     isAdr,      // 是否 安卓
     type        // 识别当前浏览器是哪个
-} = hxUtils.browser;
+} = browser;
 
 
 // type 返回结果
@@ -164,5 +168,16 @@ const callCamera = function () {
 
 ```
 
+browser
+
+```html
+
+    <script src="/dist/hx-utils.js"></script>
+    <script>
+        console.log(hxUtils, hxUtils.generateId()) // 生成随机 id
+        console.log(hxUtils.moment.format(new Date(), "yyyy年MM月dd日 HH时mm分ss秒 星期W")) // 日期格式化
+    </script>
+
+```
 
 <!-- [参考](https://github.com/shiguang0116/sg-utils) -->
