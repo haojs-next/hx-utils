@@ -1,8 +1,11 @@
-export * as moment from "./date";
+export { moment } from "./date";
+export { deepCopy } from "./clone";
+export { browser } from "./browser";
 export { generateId, regIdCard, regPhone, isType, verifyType, encryptIdCard, encryptPhone, regFixedPhone, regUrl, isPhone, uuid } from "./util";
-export * as deepCopy from "./clone";
-export * as browser from "./browser";
-
+import { moment } from "./date";
+import { deepCopy } from "./clone";
+import { browser } from "./browser";
+import { generateId, regIdCard, regPhone, isType, verifyType, encryptIdCard, encryptPhone, regFixedPhone, regUrl, isPhone, uuid } from "./util";
 const utils = {
     generateId,
     regIdCard,

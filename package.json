@@ -1,6 +1,6 @@
 {
   "name": "hx-utils-js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "JavaScript tools",
   "main": "dist/hx-utils.cjs.js",
   "module": "dist/hx-utils.esm.js",
@@ -9,14 +9,14 @@
   "author": "hao",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
     "dev": "rollup -c -w",
+    "build": "rollup -c --environment NODE_ENV:production",
     "pub": "npm publish"
   },
   "devDependencies": {
-    "core-js": "^3.18.0",
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
+    "core-js": "^3.18.0",
     "rollup": "^2.56.3",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",

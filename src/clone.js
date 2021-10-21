@@ -8,7 +8,7 @@ function find(list, f) {
  * @param {*} obj
  * @param {*} cache
  */
- function deepCopy(obj, cache = []) {
+export function deepCopy(obj, cache = []) {
     if (obj && isType(obj, "File")) return obj;
     if (obj === null || typeof obj !== "object") return obj;
 
@@ -27,4 +27,3 @@ function find(list, f) {
     return copy;
 }
 
-export default deepCopy;

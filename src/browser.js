@@ -124,7 +124,7 @@ const type = function () {
     if (isEdge()) return "edge";
 };
 
-const browser = {
+export const browser = {
     isIE,
     isEdge,
     isOpera,
@@ -139,5 +139,3 @@ const browser = {
     isAdr,
     type
 }
-
-export default browser;

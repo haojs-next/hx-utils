@@ -88,6 +88,4 @@ class Fecha {
     }
 }
 
-let h = new Fecha();
-
-export default h;
+export const moment = new Fecha();
