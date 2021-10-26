@@ -20,14 +20,25 @@ if (isPro) {
     plugins.push(terser());
 }
 
+// 设置头部注释信息
+const banner =
+    '/*!\n' +
+    ` * hx-utils v${pkg.version}\n` +
+    ` * (c) 2018-${new Date().getFullYear()} ljh\n` +
+    ' * Released under the MIT License.\n' +
+    ' */'
+
+// 设置尾部注释信息
+const footer = `\n/** ${new Date()} **/`
+
 
 export default [
   {
     input: 'src/index.js',
     output: [
-        { file: pkg.main, format: 'cjs', name: 'hxUtils' },
-        { file: pkg.module, format: 'es', name: 'hxUtils' },
-		{ file: pkg.unpkg, format: 'umd', name: 'hxUtils' }
+        { file: pkg.main, format: 'cjs', name: 'hxUtils', banner, footer },
+        { file: pkg.module, format: 'es', name: 'hxUtils', banner, footer },
+		{ file: pkg.unpkg, format: 'umd', name: 'hxUtils', banner, footer }
     ],
     plugins
   }
