@@ -66,7 +66,8 @@ export const encryptIdCard = (card, start = 6, end = 4) => {
  */
 export const encryptPhone = (phone, start = 3, end = 4) => {
     if (!phone) return;
-    // let reg = /^(.{3})(?:\d+)(.{4})$/;
+    // let reg = /^(.{3})(?:\d+)(.{4})$/; 
+    // phone = phone.toString().replace(/^(\d{3})(\d{4})(\d{4})/g, "$1****$3");
     let reg = new RegExp(`^(.{${start}})(?:\\d+)(.{${end}})$`);
     return String(phone).replace(reg, "$1****$2");
 };
@@ -114,3 +115,23 @@ export const uuid = function() {
     }
     return S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4();
 };
+
+/**
+ * 
+ * @param {*} methodName 
+ */
+function createRound(methodName) {
+    const func = Math[methodName];
+    return (number, precision) => {
+        precision = precision == null ? 0 : precision >= 0 ? Math.min(precision, 292) : Math.max(precision, -292);
+        if (precision) {
+            let pair = `${number}e`.split("e");
+            const value = func(`${pair[0]}e${+pair[1] + precision}`);
+            pair = `${value}e`.split("e");
+            return +`${pair[0]}e${+pair[1] - precision}`;
+        }
+        return func(number);
+    };
+}
+
+export const floor = createRound("floor");

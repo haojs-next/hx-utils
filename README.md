@@ -16,63 +16,65 @@ yarn add hx-utils-js
 ## 正则验证
 
 ```javascript
-import hxUtils from 'hx-utils-js';
+import { regIdCard, regPhone, regFixedPhone, isPhone } from 'hx-utils-js';
 
-// 验证身份证号
-let card = "110101*******";
-hxUtils.regIdCard(card);
+// 验证身份证号是否合法
+let card = "110101*******0";
+regIdCard(card);
 
-// 验证手机号
-let phone = "199****";
-hxUtils.regPhone(phone);
+// 验证手机号是否合法
+let phone = "199****123";
+regPhone(phone);
 
-// 验证座机号
-hxUtils.regFixedPhone("0312-88888888")  // result: true
+// 验证座机号是否合法
+regFixedPhone("0312-88888888")  // result: true
 
-// 验证是否 座机或者手机号
-hxUtils.isPhone(phone) 
+// 验证座机或者手机号是否合法
+isPhone(phone) 
 
 
+import { encryptIdCard, encryptPhone } from 'hx-utils-js';
 // 身份证号加密
 // encryptIdCard(card, start =6, end = 4) 
-hxUtils.encryptIdCard("身份证号") // "123456********1234"
-hxUtils.encryptIdCard("身份证号", 3, 6) // "123********123456"
+encryptIdCard("身份证号") // "123456********1234"
+encryptIdCard("身份证号", 3, 6) // "123********123456"
 
 // 手机号加密
 // encryptPhone(card, start = 6, end = 4) 
-hxUtils.encryptPhone("手机号") // "123****1234"
-hxUtils.encryptPhone("手机号", 4, 2) // "1234****12"
+encryptPhone("手机号") // "123****1234"
+encryptPhone("手机号", 4, 2) // "1234****12"
 
 
+import { regUrl } from 'hx-utils-js';
 // 验证是否是 url  (必须 http 或者 https 开头)
-hxUtils.regUrl("//www.baidu.com") // false 
-hxUtils.regUrl("https://www.baidu.com") // result: true
+regUrl("//www.baidu.com") // false 
+regUrl("https://www.baidu.com") // result: true
 
 ```
 
 ## 类型
 
 ```javascript
-import hxUtils from 'hx-utils-js';
+import { isType, verifyType, generateId } from 'hx-utils-js';
 
 // 查询数据类型
-hxUtils.isType("测试字符串")  // result: [object String]
-hxUtils.isType({}) // [object Object]
+isType("测试字符串")  // result: [object String]
+isType({}) // [object Object]
 
 // 验证数据类型
-hxUtils.verifyType("测试字符串", "String")  // result: true
-hxUtils.verifyType({}, "Object") // true
+verifyType("测试字符串", "String")  // result: true
+verifyType({}, "Object") // true
 
 // 随机生成 id 
-hxUtils.generateId() // 1223132151312
+generateId() // 1223132151312
 
 // 进制
-hxUtils.generateId(16) // 进制输出
+generateId(16) // 进制输出
 
 
-
+import { uuid } from 'hx-utils-js';
 // 生成 uuid
-hxUtils.uuid()  // "244023b7-abfa-4208-e5f8-96ec49671fa9"
+uuid()  // "244023b7-abfa-4208-e5f8-96ec49671fa9"
 
 
 ```
@@ -80,40 +82,51 @@ hxUtils.uuid()  // "244023b7-abfa-4208-e5f8-96ec49671fa9"
 ## 时间
 
 ```javascript
-import hxUtils from 'hx-utils-js';
+import { moment } from 'hx-utils-js';
 
 // 注意：不支持 国际化配置，如需要请下载 dayjs、moment 等第三方工具
 // 格式： yyyy-MM-dd HH:mm:ss （YYYY 为错误，必须小写）
 
-hxUtils.moment.format(new Date(), "yyyy-MM-dd HH:mm:ss") // 2021-00-00 00:00:00
+moment.format(new Date(), "yyyy-MM-dd HH:mm:ss") // 2021-00-00 00:00:00
 
-hxUtils.moment.format("时间戳", "yyyy-MM-dd") // 2021-10-01
+moment.format("时间戳", "yyyy-MM-dd") // 2021-10-01
 
-hxUtils.moment.format("时间戳", "HH:mm:ss") // 18:00:00
+moment.format("时间戳", "HH:mm:ss") // 18:00:00
 
-hxUtils.moment.format("时间", "HH:mm:ss WWW") // 18:00:00 星期五
+moment.format("时间", "HH:mm:ss WWW") // 18:00:00 星期五
 
-hxUtils.moment.format("时间", "HH时mm分ss秒 周W") // 18时03分20秒 周五
+moment.format("时间", "HH时mm分ss秒 周W") // 18时03分20秒 周五
 
-hxUtils.moment.format("时间", "今天WW HH:mm:ss ") // 今天周五 18:00:00 
+moment.format("时间", "今天WW HH:mm:ss ") // 今天周五 18:00:00 
 
 ```
 
 ## 拷贝
 
 ```javascript
-import hxUtils from 'hx-utils-js';
+import { deepCopy } from 'hx-utils-js';
 
-hxUtils.deepCopy({});
+let obj = { name: "hvue", age: 22 }
+let newObj = deepCopy(obj);
+console.log(newObj)     // 一个新的对象
+```
+
+## 数字
+
+```javascript
+import { floor } from 'hx-utils-js';
+
+floor(13.239443563); // 13
+
+floor(13.239443563, 2); // 保留两位小数： 13.23 
 
 ```
+
 
 ## 识别浏览器
 
 ```javascript
-import { browser } from 'hx-utils-js';
-
-let {
+import {
     isIE,       // ie
     isEdge,     // edge
     isOpera,    // Opera
@@ -126,12 +139,12 @@ let {
     isMobile,   // 是否 移动端
     callCamera, // 看下面示例
     isAdr,      // 是否 安卓
-    type        // 识别当前浏览器是哪个
-} = browser;
+    browserType // 识别当前浏览器是哪个
+} from 'hx-utils-js';
 
 
-// type 返回结果
-const type = function () {
+// browserType 返回结果
+const browserType = function () {
     if (isIE()) {
         var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
         reIE.test(userAgent);

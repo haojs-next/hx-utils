@@ -1,6 +1,0 @@
-node_modules/
-rollup.*.js
-src/
-yarn.lock
-.babelrc
-examples/
