@@ -45,8 +45,11 @@ export const isFirefox = function () {
  */
 export const isWechat = function () {
     var ua = userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) === "micromessenger") return true;
-    else return false;
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        return true
+    } else {
+        return false;
+    } 
 };
 /**
  * @description 判断是否是android
